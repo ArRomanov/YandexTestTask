@@ -3,6 +3,7 @@ package delivery;
 import enums.DeliveryServiceWorkload;
 import exceptions.DeliveryException;
 import models.Delivery;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeliveryCostTests {
+
+    private DeliveryService deliveryService;
+
+    @BeforeEach
+    void prepareService(){
+        deliveryService = new DeliveryService();
+    }
 
     private static Stream<Arguments> provideArgumentsForPositive() {
         return Stream.of(
@@ -46,19 +54,17 @@ public class DeliveryCostTests {
 
     @ParameterizedTest(name = "Расчета доставки (позитивные). Расстояние:{0}, большой размер:{1}, хрупкий груз:{2}, загруженность доставки:{3}")
     @MethodSource("provideArgumentsForPositive")
-    public void calculateDeliveryCostPositive(Integer distance, Boolean isLarge, Boolean isFragile,
+    void calculateDeliveryCostPositive(Integer distance, Boolean isLarge, Boolean isFragile,
                                               DeliveryServiceWorkload workload, BigDecimal expectedSum) {
         var deliveryParameters = buildDelivery(distance, isLarge, isFragile);
-        var deliveryService = new DeliveryService();
         var actualSum = deliveryService.calculateDeliveryCost(deliveryParameters, workload);
         assertEquals(actualSum.stripTrailingZeros(), expectedSum.stripTrailingZeros());
     }
 
     @Test
     @DisplayName("Проверка кейса, когда хрупкий груз доставляется больше, чем на 30км")
-    public void checkExceptionWhenIsFragileMoreThan30() {
+    void checkExceptionWhenIsFragileMoreThan30() {
         var deliveryParameters = buildDelivery(31, true, true);
-        var deliveryService = new DeliveryService();
         var exception = assertThrows(DeliveryException.class, () -> deliveryService.calculateDeliveryCost(deliveryParameters, HIGH));
         assertThat(exception.getMessage(), containsString("Хрупкий груз не доставляется на расстояние >30км"));
     }
