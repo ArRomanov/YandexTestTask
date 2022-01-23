@@ -1,3 +1,5 @@
+package services;
+
 import enums.DeliveryServiceWorkload;
 import exceptions.DeliveryException;
 import lombok.SneakyThrows;
@@ -26,7 +28,7 @@ public class DeliveryService {
 
         if (distance > 30 && delivery.getIsFragile())
             throw new DeliveryException("Хрупкий груз не доставляется на расстояние >30км");
-        // Уточнить, включены ли в стоимость граничные значения
+        // TODO Уточнить, включены ли в стоимость граничные значения
         if (distance <= 2)
             return new BigDecimal(50);
         if (distance <= 10)

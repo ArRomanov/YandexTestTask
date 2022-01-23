@@ -1,12 +1,16 @@
 package models;
 
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 
 @Builder(toBuilder = true)
 @Value
 public class Delivery {
-    private Integer distanceKm;
-    private Boolean isLargeSize;
-    private Boolean isFragile;
+    @NonNull
+    Integer distanceKm;
+    @NonNull
+    Boolean isLargeSize;
+    @NonNull
+    Boolean isFragile;
 }
