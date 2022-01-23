@@ -32,18 +32,14 @@ public class DeliveryCostTests {
     private static Stream<Arguments> provideArgumentsForPositive() {
         return Stream.of(
                 Arguments.of(0, false, false, CRITICAL, new BigDecimal("400")),
-                Arguments.of(0, true, true, DEFAULT, new BigDecimal("550")),
                 Arguments.of(0, false, true, ABOVE_NORMAL, new BigDecimal("540")),
 
-                Arguments.of(2, false, false, CRITICAL, new BigDecimal("400")),
                 Arguments.of(2, true, true, DEFAULT, new BigDecimal("550")),
                 Arguments.of(2, true, false, ABOVE_NORMAL, new BigDecimal("400")),
 
                 Arguments.of(10, false, false, CRITICAL, new BigDecimal("400")),
-                Arguments.of(10, true, true, DEFAULT, new BigDecimal("600")),
                 Arguments.of(10, false, true, HIGH, new BigDecimal("700")),
 
-                Arguments.of(30, false, false, CRITICAL, new BigDecimal("480")),
                 Arguments.of(30, true, true, DEFAULT, new BigDecimal("700")),
                 Arguments.of(30, true, false, HIGH, new BigDecimal("560")),
 
@@ -52,7 +48,7 @@ public class DeliveryCostTests {
         );
     }
 
-    @ParameterizedTest(name = "Расчета доставки (позитивные). Расстояние:{0}, большой размер:{1}, хрупкий груз:{2}, загруженность доставки:{3}")
+    @ParameterizedTest(name = "Расчета доставки (позитивный). Расстояние:{0}, большой размер:{1}, хрупкий груз:{2}, загруженность доставки:{3}")
     @MethodSource("provideArgumentsForPositive")
     void calculateDeliveryCostPositive(Integer distance, Boolean isLarge, Boolean isFragile,
                                               DeliveryServiceWorkload workload, BigDecimal expectedSum) {
