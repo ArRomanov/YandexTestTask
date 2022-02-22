@@ -1,5 +1,5 @@
-# Тестовое задание на вакансию [Наставник](https://practicum.yandex.ru/job/vacancy-60)
-### Ссылка на [задание](https://praktikum.notion.site/Java-ff45588bfab04eb3a03827701d320c2f)
+# Тестовое задание на вакансию [Ревьюер](https://practicum.yandex.ru/job/vacancy-75)
+### Ссылка на [задание](https://praktikum.notion.site/Java-a1e67db232084a14a1f9bb4e99e07e47)
 
 Используется JDK 11  
 `./gradlew clean test --info` - команда для запуска тестов
